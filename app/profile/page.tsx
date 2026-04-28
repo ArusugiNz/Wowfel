@@ -71,19 +71,19 @@ export default function ProfilePage() {
 
     ...(role === "admin"
       ? [
-          {
-            icon: <IconShieldCheck size={20} className="text-amber-600" />,
-            label: "Transaction Confirmation",
-            href: "/admin-transactions",
-            color: "bg-amber-50"
-          },
-          {
-            icon: <IconUser size={20} className="text-amber-600" />,
-            label: "User Management",
-            href: "/admin-users",
-            color: "bg-amber-50"
-          }
-        ]
+        {
+          icon: <IconShieldCheck size={20} className="text-amber-600" />,
+          label: "Transaction Confirmation",
+          href: "/admin-transactions",
+          color: "bg-amber-50"
+        },
+        {
+          icon: <IconUser size={20} className="text-amber-600" />,
+          label: "User Management",
+          href: "/admin-users",
+          color: "bg-amber-50"
+        }
+      ]
       : [])
   ];
 
@@ -91,7 +91,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-neutral-900 dark:text-neutral-100 flex flex-col pb-20 transition-colors duration-200">
       <Navbar type="profile" />
 
-      <div className="bg-linear-to-r from-blue-500 via-indigo-500 to-purple-500 pt-10 pb-20 px-6 relative">
+      <div className="bg-linear-to-r from-red-500 via-red-500 to-red-500 pt-10 pb-20 px-6 relative">
         <div className="max-w-4xl mx-auto flex items-center gap-4 text-white">
           <div className="w-20 h-20 rounded-full border-2 border-white/20 bg-white/10 flex items-center justify-center backdrop-blur-sm overflow-hidden shrink-0">
             {user?.photoURL ? (

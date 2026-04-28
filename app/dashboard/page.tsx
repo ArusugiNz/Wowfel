@@ -171,7 +171,7 @@ export default function Dashboard() {
 
                       <button
                         onClick={(e) => {
-                          e.preventDefault(); 
+                          e.preventDefault();
                           handleAdd(product);
                         }}
                         className="relative z-20 flex items-center gap-2 bg-neutral-900 dark:bg-blue-600 text-white px-4 py-2.5 rounded-xl font-medium hover:bg-neutral-800 dark:hover:bg-blue-700 active:scale-95 transition shadow-sm"
