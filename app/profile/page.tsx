@@ -122,7 +122,6 @@ export default function ProfilePage() {
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 -mt-10 relative z-10">
 
-        {/* Menu Cards */}
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-neutral-100 dark:border-slate-700 overflow-hidden mb-6 transition-colors duration-200">
           {menuItems.map((item, index) => (
             <Link
@@ -142,7 +141,6 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* Logout Button */}
         <button
           onClick={handleLogout}
           className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-2xl shadow-sm hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-200 dark:hover:border-red-900/50 transition active:scale-95 font-medium"
