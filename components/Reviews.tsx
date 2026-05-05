@@ -70,21 +70,21 @@ export default function Reviews({ productId }: { productId: string }) {
   };
 
   return (
-    <div className="mt-12 w-full">
-      <h2 className="text-2xl font-bold tracking-tight text-neutral-900 mb-6">Customer Reviews</h2>
+    <div className="mt-12 w-full transition-colors duration-200">
+      <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white mb-6">Customer Reviews</h2>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 mb-8">
-        <h3 className="font-semibold text-neutral-800 mb-4">Write a Review</h3>
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-neutral-100 dark:border-slate-700 mb-8 transition-colors duration-200">
+        <h3 className="font-semibold text-neutral-800 dark:text-neutral-100 mb-4">Write a Review</h3>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-600">Rating:</span>
+            <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">Rating:</span>
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
                   type="button"
                   onClick={() => setRating(star)}
-                  className={`focus:outline-none transition ${star <= rating ? 'text-amber-500' : 'text-neutral-200 hover:text-amber-300'}`}
+                  className={`focus:outline-none transition ${star <= rating ? 'text-amber-500' : 'text-neutral-200 dark:text-slate-600 hover:text-amber-300 dark:hover:text-amber-400/50'}`}
                 >
                   <IconStarFilled size={24} />
                 </button>
@@ -96,12 +96,12 @@ export default function Reviews({ productId }: { productId: string }) {
             placeholder="What do you think about this product?"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition dark:text-white dark:placeholder:text-neutral-500"
           />
           <button
             type="submit"
             disabled={submitting}
-            className="self-end bg-neutral-900 text-white px-6 py-2 rounded-xl text-sm font-medium hover:bg-neutral-800 transition disabled:opacity-50"
+            className="self-end bg-neutral-900 dark:bg-blue-600 text-white px-6 py-2 rounded-xl text-sm font-medium hover:bg-neutral-800 dark:hover:bg-blue-700 transition disabled:opacity-50"
           >
             {submitting ? "Submitting..." : "Submit Review"}
           </button>
@@ -110,22 +110,22 @@ export default function Reviews({ productId }: { productId: string }) {
 
       <div className="flex flex-col gap-4">
         {reviews.length === 0 ? (
-          <div className="text-center py-8 text-neutral-500 bg-neutral-50 rounded-2xl border border-neutral-100 border-dashed">
+          <div className="text-center py-8 text-neutral-500 dark:text-neutral-400 bg-neutral-50 dark:bg-slate-800/50 rounded-2xl border border-neutral-100 dark:border-slate-700 border-dashed">
             No reviews yet. Be the first to review this product!
           </div>
         ) : (
           reviews.map((review) => (
-            <div key={review.id} className="bg-white p-5 rounded-2xl shadow-sm border border-neutral-100">
+            <div key={review.id} className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-neutral-100 dark:border-slate-700 transition-colors duration-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-neutral-900">{review.userName}</span>
+                <span className="font-semibold text-neutral-900 dark:text-white">{review.userName}</span>
                 <div className="flex gap-1 text-amber-500">
                   {[...Array(5)].map((_, i) => (
-                    <IconStarFilled key={i} size={14} className={i < review.rating ? "" : "text-neutral-200"} />
+                    <IconStarFilled key={i} size={14} className={i < review.rating ? "" : "text-neutral-200 dark:text-slate-600"} />
                   ))}
                 </div>
               </div>
-              <p className="text-neutral-600 text-sm leading-relaxed">{review.comment}</p>
-              <span className="text-xs text-neutral-400 mt-3 block">
+              <p className="text-neutral-600 dark:text-neutral-300 text-sm leading-relaxed">{review.comment}</p>
+              <span className="text-xs text-neutral-400 dark:text-neutral-500 mt-3 block">
                 {review.createdAt ? new Date(review.createdAt.toDate()).toLocaleDateString() : 'Just now'}
               </span>
             </div>

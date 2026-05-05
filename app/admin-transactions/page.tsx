@@ -104,24 +104,24 @@ export default function AdminTransactionsPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center transition-colors duration-200">
                 <div className="w-8 h-8 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-neutral-900 pb-20">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-neutral-900 dark:text-neutral-100 pb-20 transition-colors duration-200">
             <Navbar type="home" />
 
-            <header className="bg-white border-b border-neutral-100 px-6 py-4 sticky top-16 z-40">
+            <header className="bg-white dark:bg-slate-800 border-b border-neutral-100 dark:border-slate-700 px-6 py-4 sticky top-16 z-40 transition-colors duration-200">
                 <div className="max-w-4xl mx-auto flex items-center gap-4">
-                    <Link href="/dashboard" className="p-2 hover:bg-neutral-100 rounded-full transition text-neutral-600">
+                    <Link href="/dashboard" className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-full transition text-neutral-600 dark:text-neutral-400">
                         <IconArrowLeft size={20} />
                     </Link>
                     <div>
-                        <h1 className="text-xl font-bold tracking-tight">Transaction Confirmation</h1>
-                        <p className="text-sm text-neutral-500">Manage and verify customer orders</p>
+                        <h1 className="text-xl font-bold tracking-tight dark:text-white">Transaction Confirmation</h1>
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400">Manage and verify customer orders</p>
                     </div>
                 </div>
             </header>
@@ -129,18 +129,18 @@ export default function AdminTransactionsPage() {
             <main className="max-w-4xl mx-auto px-6 py-8">
 
                 {transactions.length === 0 ? (
-                    <div className="bg-white rounded-3xl p-12 shadow-sm border border-neutral-100 flex flex-col items-center justify-center text-center">
-                        <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-6">
+                    <div className="bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-sm border border-neutral-100 dark:border-slate-700 flex flex-col items-center justify-center text-center transition-colors duration-200">
+                        <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-500 dark:text-blue-400 mb-6">
                             <IconReceipt size={40} stroke={1.5} />
                         </div>
-                        <h2 className="text-2xl font-bold text-neutral-900 mb-2">No pending transactions</h2>
-                        <p className="text-neutral-500 max-w-sm mb-8">
+                        <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">No pending transactions</h2>
+                        <p className="text-neutral-500 dark:text-neutral-400 max-w-sm mb-8">
                             All customer orders have been processed. New transactions requiring confirmation will appear here.
                         </p>
 
                         <Link
                             href="/dashboard"
-                            className="bg-neutral-900 text-white px-8 py-3 rounded-xl font-medium hover:bg-neutral-800 transition shadow-sm active:scale-95"
+                            className="bg-neutral-900 dark:bg-blue-600 text-white px-8 py-3 rounded-xl font-medium hover:bg-neutral-800 dark:hover:bg-blue-700 transition shadow-sm active:scale-95"
                         >
                             Return to Dashboard
                         </Link>
@@ -148,54 +148,54 @@ export default function AdminTransactionsPage() {
                 ) : (
                     <div className="flex flex-col gap-4">
                         {transactions.map((transaction) => (
-                            <div key={transaction.id} className="bg-white rounded-2xl p-6 shadow-sm border border-neutral-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div key={transaction.id} className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-neutral-100 dark:border-slate-700 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-colors duration-200">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
                                         <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
                                             transaction.status === "confirmed"
-                                                ? "bg-green-100 text-green-700"
+                                                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                                 : transaction.status === "pending_verification"
-                                                ? "bg-blue-100 text-blue-700"
+                                                ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                                                 : transaction.status === "cancelled"
-                                                ? "bg-red-100 text-red-700"
-                                                : "bg-amber-100 text-amber-700"
+                                                ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                                : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                                             }`}>
                                             {transaction.status === "confirmed" ? "Confirmed" 
                                             : transaction.status === "pending_verification" ? "Pending Verification"
                                             : transaction.status === "cancelled" ? "Cancelled"
                                             : "Awaiting Payment"}
                                         </span>
-                                        <span className="text-xs text-neutral-400 font-mono">
+                                        <span className="text-xs text-neutral-400 dark:text-neutral-500 font-mono">
                                             ID: {transaction.orderId || transaction.id.slice(0, 8)}
                                         </span>
                                     </div>
 
-                                    <h3 className="font-bold text-lg text-neutral-900 mb-1">
+                                    <h3 className="font-bold text-lg text-neutral-900 dark:text-white mb-1">
                                         {transaction.userEmail}
                                     </h3>
 
-                                    <div className="text-sm text-neutral-500 mb-4">
-                                        {transaction.items?.length || 0} items • <span className="text-neutral-900 font-semibold">Rp {transaction.total?.toLocaleString("id-ID")}</span>
+                                    <div className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                                        {transaction.items?.length || 0} items • <span className="text-neutral-900 dark:text-white font-semibold">Rp {transaction.total?.toLocaleString("id-ID")}</span>
                                     </div>
 
-                                    <div className="bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+                                    <div className="bg-neutral-50 dark:bg-slate-900/50 rounded-xl p-4 border border-neutral-100 dark:border-slate-700">
                                         <div className="mb-4 text-sm">
-                                            <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1">Shipping Address</h4>
-                                            <p className="text-neutral-700">{transaction.address || "No address provided"}</p>
+                                            <h4 className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-1">Shipping Address</h4>
+                                            <p className="text-neutral-700 dark:text-neutral-300">{transaction.address || "No address provided"}</p>
                                         </div>
-                                        <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Order Details</h4>
+                                        <h4 className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">Order Details</h4>
                                         <ul className="flex flex-col gap-2">
                                             {transaction.items?.map((item: any, idx: number) => (
                                                 <li key={idx} className="flex items-center justify-between text-sm">
-                                                    <span className="text-neutral-700">{item.quantity}x {item.name}</span>
-                                                    <span className="text-neutral-500">Rp {(item.price * item.quantity).toLocaleString("id-ID")}</span>
+                                                    <span className="text-neutral-700 dark:text-neutral-300">{item.quantity}x {item.name}</span>
+                                                    <span className="text-neutral-500 dark:text-neutral-400">Rp {(item.price * item.quantity).toLocaleString("id-ID")}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                         {transaction.strukUrl && (
-                                            <div className="mt-4 pt-4 border-t border-neutral-200">
-                                                <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Payment Receipt</h4>
-                                                <a href={transaction.strukUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm">
+                                            <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-slate-700">
+                                                <h4 className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">Payment Receipt</h4>
+                                                <a href={transaction.strukUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm">
                                                     <IconPhoto size={16} /> View Receipt
                                                 </a>
                                             </div>
@@ -209,14 +209,14 @@ export default function AdminTransactionsPage() {
                                             <button
                                                 onClick={() => handleCancelTransaction(transaction.id)}
                                                 disabled={cancellingId === transaction.id || updatingId === transaction.id}
-                                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-50 text-red-600 px-4 py-3 rounded-xl font-medium hover:bg-red-100 transition shadow-sm active:scale-95 disabled:opacity-50 border border-red-100"
+                                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition shadow-sm active:scale-95 disabled:opacity-50 border border-red-100 dark:border-red-900/50"
                                             >
                                                 {cancellingId === transaction.id ? "..." : "Reject"}
                                             </button>
                                             <button
                                                 onClick={() => handleConfirmTransaction(transaction.id)}
                                                 disabled={updatingId === transaction.id || cancellingId === transaction.id}
-                                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition shadow-sm active:scale-95 disabled:opacity-50"
+                                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 dark:hover:bg-blue-500 transition shadow-sm active:scale-95 disabled:opacity-50"
                                             >
                                                 {updatingId === transaction.id ? (
                                                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -230,13 +230,13 @@ export default function AdminTransactionsPage() {
                                         </>
                                     )}
                                     {transaction.status === "confirmed" && (
-                                        <div className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-green-50 text-green-700 px-6 py-3 rounded-xl font-medium border border-green-200">
+                                        <div className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-6 py-3 rounded-xl font-medium border border-green-200 dark:border-green-900/50">
                                             <IconCheck size={20} />
                                             <span>Verified</span>
                                         </div>
                                     )}
                                     {transaction.status === "cancelled" && (
-                                        <div className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-50 text-red-700 px-6 py-3 rounded-xl font-medium border border-red-200">
+                                        <div className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-6 py-3 rounded-xl font-medium border border-red-200 dark:border-red-900/50">
                                             <IconX size={20} />
                                             <span>Cancelled</span>
                                         </div>

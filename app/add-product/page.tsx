@@ -89,14 +89,14 @@ export default function AddProductPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-neutral-900 pb-20">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-neutral-900 dark:text-neutral-100 pb-20 transition-colors duration-200">
             <Toast show={showToast} message="Product added successfully!" />
 
-            <header className="bg-white border-b border-neutral-100 px-6 py-4 sticky top-0 z-40">
+            <header className="bg-white dark:bg-slate-800 border-b border-neutral-100 dark:border-slate-700 px-6 py-4 sticky top-0 z-40 transition-colors duration-200">
                 <div className="max-w-3xl mx-auto flex items-center gap-4">
                     <Link
                         href="/dashboard"
-                        className="p-2 hover:bg-neutral-100 rounded-full transition text-neutral-600"
+                        className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-full transition text-neutral-600 dark:text-neutral-400"
                     >
                         <IconArrowLeft size={20} />
                     </Link>
@@ -104,7 +104,7 @@ export default function AddProductPage() {
                         <h1 className="text-xl font-bold tracking-tight">
                             Add New Product
                         </h1>
-                        <p className="text-sm text-neutral-500">
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
                             Create a new hexagon package listing
                         </p>
                     </div>
@@ -114,17 +114,17 @@ export default function AddProductPage() {
             <main className="max-w-3xl mx-auto px-6 py-8">
                 <form
                     onSubmit={handleAdd}
-                    className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-neutral-100"
+                    className="bg-white dark:bg-slate-800 rounded-3xl p-6 md:p-8 shadow-sm border border-neutral-100 dark:border-slate-700 transition-colors duration-200"
                 >
                     <div className="space-y-6">
 
                         <div className="flex flex-col gap-2">
-                            <label className="font-semibold text-neutral-800 text-sm">
+                            <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                 Product Image URL
                             </label>
 
                             <div className="flex items-start gap-4">
-                                <div className="w-24 h-24 rounded-2xl bg-neutral-100 overflow-hidden border border-neutral-200 shrink-0 flex items-center justify-center text-neutral-400">
+                                <div className="w-24 h-24 rounded-2xl bg-neutral-100 dark:bg-slate-700 overflow-hidden border border-neutral-200 dark:border-slate-600 shrink-0 flex items-center justify-center text-neutral-400">
                                     {image ? (
                                         <img
                                             src={image}
@@ -150,7 +150,7 @@ export default function AddProductPage() {
                                                 setImage(URL.createObjectURL(e.target.files[0]));
                                             }
                                         }}
-                                        className="w-1/2 bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                        className="w-1/2 bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-slate-700 dark:file:text-blue-400 dark:text-white"
                                     />
                                     <span className="text-xs text-neutral-400 font-bold">OR</span>
                                     <input
@@ -159,14 +159,14 @@ export default function AddProductPage() {
                                         value={imageFile ? "Custom File Selected" : image}
                                         disabled={!!imageFile}
                                         onChange={(e) => setImage(e.target.value)}
-                                        className="w-1/2 bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3 disabled:opacity-50"
+                                        className="w-1/2 bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 disabled:opacity-50 dark:text-white"
                                     />
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="font-semibold text-neutral-800 text-sm">
+                            <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                 Product Name *
                             </label>
                             <input
@@ -174,14 +174,14 @@ export default function AddProductPage() {
                                 placeholder="e.g. Midnight Onyx Hexagon"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3"
+                                className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 dark:text-white"
                             />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                             <div className="flex flex-col gap-2">
-                                <label className="font-semibold text-neutral-800 text-sm">
+                                <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                     Price (Rp) *
                                 </label>
                                 <input
@@ -191,12 +191,12 @@ export default function AddProductPage() {
                                     step="0.01"
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
-                                    className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3"
+                                    className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 dark:text-white"
                                 />
                             </div>
 
                             <div className="flex flex-col gap-2">
-                                <label className="font-semibold text-neutral-800 text-sm">
+                                <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                     Initial Stock *
                                 </label>
                                 <input
@@ -205,26 +205,26 @@ export default function AddProductPage() {
                                     min="0"
                                     value={stock}
                                     onChange={(e) => setStock(e.target.value)}
-                                    className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3"
+                                    className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 dark:text-white"
                                 />
                             </div>
 
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="font-semibold text-neutral-800 text-sm">
+                            <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                 Description
                             </label>
                             <textarea
                                 rows={3}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3"
+                                className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 dark:text-white"
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="font-semibold text-neutral-800 text-sm">
+                            <label className="font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
                                 Custom Trakteer URL (Optional)
                             </label>
                             <input
@@ -232,20 +232,20 @@ export default function AddProductPage() {
                                 placeholder="https://trakteer.id/your-username"
                                 value={trakteerUrl}
                                 onChange={(e) => setTrakteerUrl(e.target.value)}
-                                className="w-full bg-slate-50 border border-neutral-200 rounded-xl px-4 py-3"
+                                className="w-full bg-slate-50 dark:bg-slate-900 border border-neutral-200 dark:border-slate-700 rounded-xl px-4 py-3 dark:text-white"
                             />
-                            <p className="text-xs text-neutral-500">If left empty, we will use the default Trakteer URL from your profile settings.</p>
+                            <p className="text-xs text-neutral-500 dark:text-neutral-400">If left empty, we will use the default Trakteer URL from your profile settings.</p>
                         </div>
 
                     </div>
 
-                    <hr className="border-neutral-100 my-8" />
+                    <hr className="border-neutral-100 dark:border-slate-700 my-8" />
 
                     <div className="flex justify-end gap-3">
 
                         <Link
                             href="/dashboard"
-                            className="px-6 py-3 rounded-xl font-medium text-neutral-600 hover:bg-neutral-100"
+                            className="px-6 py-3 rounded-xl font-medium text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-slate-700 transition"
                         >
                             Cancel
                         </Link>
@@ -253,7 +253,7 @@ export default function AddProductPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl disabled:opacity-70"
+                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-xl disabled:opacity-70"
                         >
                             <IconDeviceFloppy size={20} />
                             {loading ? "Saving..." : "Save Product"}

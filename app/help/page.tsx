@@ -32,7 +32,7 @@ export default function HelpSupportPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-neutral-900 flex flex-col pb-20">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-neutral-900 dark:text-neutral-100 flex flex-col pb-20 transition-colors duration-200">
             {/* Header */}
             <div className="bg-linear-to-r from-blue-500 via-indigo-500 to-purple-500 pt-10 pb-20 px-6 relative">
                 <div className="max-w-3xl mx-auto flex items-center gap-4 text-white">
@@ -51,55 +51,55 @@ export default function HelpSupportPage() {
 
                 {/* Contact Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="mailto:support@wowfel.com" className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 flex items-center gap-4 hover:shadow-md transition group">
-                        <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                    <a href="mailto:support@wowfel.com" className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-neutral-100 dark:border-slate-700 flex items-center gap-4 hover:shadow-md transition group">
+                        <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition">
                             <IconMail size={24} />
                         </div>
                         <div>
-                            <h3 className="font-bold text-neutral-900">Email Support</h3>
-                            <p className="text-sm text-neutral-500">support@wowfel.com</p>
+                            <h3 className="font-bold text-neutral-900 dark:text-white">Email Support</h3>
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">support@wowfel.com</p>
                         </div>
                     </a>
-                    <button className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 flex items-center gap-4 hover:shadow-md transition group text-left">
-                        <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition">
+                    <button className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-neutral-100 dark:border-slate-700 flex items-center gap-4 hover:shadow-md transition group text-left">
+                        <div className="w-12 h-12 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition">
                             <IconMessageCircle2 size={24} />
                         </div>
                         <div>
-                            <h3 className="font-bold text-neutral-900">Live Chat</h3>
-                            <p className="text-sm text-neutral-500">Usually replies in 5m</p>
+                            <h3 className="font-bold text-neutral-900 dark:text-white">Live Chat</h3>
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">Usually replies in 5m</p>
                         </div>
                     </button>
                 </div>
 
                 {/* FAQ Section */}
-                <div className="bg-white rounded-3xl shadow-sm border border-neutral-100 overflow-hidden mt-4">
-                    <div className="p-6 border-b border-neutral-100 bg-slate-50/50 flex items-center gap-3">
-                        <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center shrink-0">
+                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-neutral-100 dark:border-slate-700 overflow-hidden mt-4 transition-colors duration-200">
+                    <div className="p-6 border-b border-neutral-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50 flex items-center gap-3">
+                        <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center shrink-0">
                             <IconHelpCircle size={20} />
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-neutral-900">Frequently Asked Questions</h2>
-                            <p className="text-sm text-neutral-500">Quick answers to common issues</p>
+                            <h2 className="text-xl font-bold text-neutral-900 dark:text-white">Frequently Asked Questions</h2>
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">Quick answers to common issues</p>
                         </div>
                     </div>
 
                     <div className="p-2">
                         {faqs.map((faq, index) => (
-                            <div key={index} className="border-b border-neutral-100 last:border-0">
+                            <div key={index} className="border-b border-neutral-100 dark:border-slate-700 last:border-0">
                                 <button
                                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                                    className="w-full text-left px-4 py-4 flex items-center justify-between font-semibold text-neutral-800 hover:text-blue-600 transition"
+                                    className="w-full text-left px-4 py-4 flex items-center justify-between font-semibold text-neutral-800 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400 transition"
                                 >
                                     {faq.q}
                                     <IconChevronDown
                                         size={20}
-                                        className={`text-neutral-400 transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-blue-500' : ''}`}
+                                        className={`text-neutral-400 dark:text-neutral-500 transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-blue-500 dark:text-blue-400' : ''}`}
                                     />
                                 </button>
                                 <div
                                     className={`px-4 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === index ? 'max-h-40 pb-4 opacity-100' : 'max-h-0 opacity-0'}`}
                                 >
-                                    <p className="text-sm text-neutral-600 leading-relaxed">
+                                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
                                         {faq.a}
                                     </p>
                                 </div>

@@ -234,7 +234,7 @@ export default function ProductDetailPage() {
               </button>
             </div>
 
-            <p className={`text-xs text-center mt-4 ${(product.stock !== undefined && product.stock <= 0) ? 'text-red-500 font-bold' : 'text-neutral-400'}`}>
+            <p className={`text-xs text-center mt-4 ${(product.stock !== undefined && product.stock <= 0) ? 'text-red-500 font-bold' : 'text-neutral-400 dark:text-neutral-500'}`}>
               {(product.stock !== undefined && product.stock <= 0) ? "Currently out of stock" : `Only ${product.stock || 'a few'} items left in stock — order soon.`}
             </p>
 

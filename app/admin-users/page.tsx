@@ -73,25 +73,25 @@ export default function AdminUsersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center transition-colors duration-200">
         <div className="w-8 h-8 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-neutral-900 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-neutral-900 dark:text-neutral-100 pb-20 transition-colors duration-200">
       <Navbar type="home" />
 
       {/* Header */}
-      <header className="bg-white border-b border-neutral-100 px-6 py-4 sticky top-16 z-40">
+      <header className="bg-white dark:bg-slate-800 border-b border-neutral-100 dark:border-slate-700 px-6 py-4 sticky top-16 z-40 transition-colors duration-200">
         <div className="max-w-4xl mx-auto flex items-center gap-4">
-          <Link href="/profile" className="p-2 hover:bg-neutral-100 rounded-full transition text-neutral-600">
+          <Link href="/profile" className="p-2 hover:bg-neutral-100 dark:hover:bg-slate-700 rounded-full transition text-neutral-600 dark:text-neutral-400">
             <IconArrowLeft size={20} />
           </Link>
           <div>
-            <h1 className="text-xl font-bold tracking-tight">User Management</h1>
-            <p className="text-sm text-neutral-500">Manage rules and permissions for platform users</p>
+            <h1 className="text-xl font-bold tracking-tight dark:text-white">User Management</h1>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400">Manage rules and permissions for platform users</p>
           </div>
         </div>
       </header>
@@ -99,18 +99,18 @@ export default function AdminUsersPage() {
       <main className="max-w-4xl mx-auto px-6 py-8">
 
         {users.length === 0 ? (
-          <div className="bg-white rounded-3xl p-12 shadow-sm border border-neutral-100 flex flex-col items-center justify-center text-center">
-            <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-6">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-sm border border-neutral-100 dark:border-slate-700 flex flex-col items-center justify-center text-center transition-colors duration-200">
+            <div className="w-20 h-20 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-blue-500 dark:text-blue-400 mb-6">
               <IconUser size={40} stroke={1.5} />
             </div>
-            <h2 className="text-2xl font-bold text-neutral-900 mb-2">No users found</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">No users found</h2>
           </div>
         ) : (
           <div className="flex flex-col gap-4">
             {users.map((u) => (
-              <div key={u.id} className="bg-white rounded-2xl p-6 shadow-sm border border-neutral-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div key={u.id} className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-neutral-100 dark:border-slate-700 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-colors duration-200">
                 <div className="flex items-center gap-4 flex-1">
-                  <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden shrink-0 flex items-center justify-center text-slate-400 font-bold border border-slate-200">
+                  <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden shrink-0 flex items-center justify-center text-slate-400 dark:text-slate-300 font-bold border border-slate-200 dark:border-slate-600">
                     {u.photoURL ? (
                       <img src={u.photoURL} className="w-full h-full object-cover" alt="Profile" />
                     ) : (
@@ -118,13 +118,13 @@ export default function AdminUsersPage() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg text-neutral-900 mb-1 leading-tight">
+                    <h3 className="font-bold text-lg text-neutral-900 dark:text-white mb-1 leading-tight">
                       {u.name || "Unknown User"}
                     </h3>
-                    <div className="text-sm text-neutral-500 flex flex-col sm:flex-row gap-1 sm:gap-3">
+                    <div className="text-sm text-neutral-500 dark:text-neutral-400 flex flex-col sm:flex-row gap-1 sm:gap-3">
                       <span>{u.email}</span>
                       <span className="hidden sm:inline">•</span>
-                      <span className="font-mono text-xs text-neutral-400">ID: {u.id.substring(0, 8)}...</span>
+                      <span className="font-mono text-xs text-neutral-400 dark:text-neutral-500">ID: {u.id.substring(0, 8)}...</span>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ export default function AdminUsersPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full md:w-auto">
 
                   {u.requestedRole && (
-                    <div className="flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-3 py-1.5 rounded-lg border border-amber-200 dark:border-amber-900/50">
                       <IconShieldLock size={14} />
                       Requested: {u.requestedRole}
                     </div>
@@ -145,9 +145,9 @@ export default function AdminUsersPage() {
                       onChange={(e) => handleRoleChange(u.id, e.target.value)}
                       disabled={updatingId === u.id}
                       className={`pl-3 pr-8 py-2 rounded-xl text-sm font-semibold outline-none transition disabled:opacity-50 border
-                                        ${u.role === 'admin' ? 'bg-purple-50 text-purple-700 border-purple-200 focus:border-purple-500' :
-                          u.role === 'seller' ? 'bg-blue-50 text-blue-700 border-blue-200 focus:border-blue-500' :
-                            'bg-slate-50 text-slate-700 border-slate-200 focus:border-slate-500'}
+                                        ${u.role === 'admin' ? 'bg-purple-50 text-purple-700 border-purple-200 focus:border-purple-500 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-900/50' :
+                          u.role === 'seller' ? 'bg-blue-50 text-blue-700 border-blue-200 focus:border-blue-500 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-900/50' :
+                            'bg-slate-50 text-slate-700 border-slate-200 focus:border-slate-500 dark:bg-slate-900/50 dark:text-slate-300 dark:border-slate-700'}
                                     `}
                     >
                       <option value="customer">Customer</option>
