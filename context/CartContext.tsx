@@ -2,11 +2,18 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+import { toast } from "react-hot-toast";
+
 export type Product = {
   id: string;
   name: string;
   price: number;
   image?: string;
+  stock?: number;
+  sellerId?: string;
+  description?: string;
+  ratingCount?: number;
+  totalRating?: number;
 };
 
 export type CartItem = Product & {
@@ -29,6 +36,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = (product: Product, quantity: number = 1) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
+      const currentQty = existing ? existing.quantity : 0;
+      
+      if (product.stock !== undefined && currentQty + quantity > product.stock) {
+        toast.error(`Only ${product.stock} items available in stock.`);
+        return prev;
+      }
+
       if (existing) {
         return prev.map((item) =>
           item.id === product.id
@@ -49,6 +63,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       prev.map((item) => {
         if (item.id === productId) {
           const newQuantity = Math.max(1, item.quantity + amount);
+          if (item.stock !== undefined && newQuantity > item.stock) {
+             toast.error(`Only ${item.stock} items available in stock.`);
+             return item;
+          }
           return { ...item, quantity: newQuantity };
         }
         return item;

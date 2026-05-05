@@ -27,6 +27,8 @@ export default function SettingsPage() {
     const [selectedRoleRequest, setSelectedRoleRequest] = useState("seller");
     const [trakteerUrl, setTrakteerUrl] = useState("");
     const [savingTrakteer, setSavingTrakteer] = useState(false);
+    const [address, setAddress] = useState("");
+    const [savingAddress, setSavingAddress] = useState(false);
 
     const [theme, setTheme] = useState("light");
 
@@ -47,6 +49,7 @@ export default function SettingsPage() {
                     const data = userSnap.data();
                     setUserData(data);
                     if (data.trakteerUrl) setTrakteerUrl(data.trakteerUrl);
+                    if (data.address) setAddress(data.address);
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -155,6 +158,22 @@ export default function SettingsPage() {
         }
     };
 
+    const handleSaveAddress = async () => {
+        if (!user) return;
+        setSavingAddress(true);
+        try {
+            const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, { address });
+            setUserData({ ...userData, address });
+            toast.success("Shipping address saved!");
+        } catch (error) {
+            console.error("Error saving address:", error);
+            toast.error("Failed to save address.");
+        } finally {
+            setSavingAddress(false);
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
@@ -244,6 +263,33 @@ export default function SettingsPage() {
                                                 {uploadingImage ? "Uploading..." : <><IconUpload size={16} /> Save Picture</>}
                                             </button>
                                         )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr className="border-neutral-100 dark:border-slate-700" />
+
+                            <div>
+                                <h2 className="text-xl font-bold mb-4">Shipping Address</h2>
+                                <div className="bg-neutral-50 dark:bg-slate-700/50 p-6 rounded-2xl border border-neutral-100 dark:border-slate-600">
+                                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                                        Enter your full shipping address for orders.
+                                    </p>
+                                    <div className="flex flex-col gap-3">
+                                        <textarea
+                                            rows={3}
+                                            placeholder="123 Hexagon St, City, Country, ZIP"
+                                            value={address}
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            className="w-full bg-white dark:bg-slate-800 border border-neutral-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:border-blue-500 dark:text-white"
+                                        />
+                                        <button
+                                            onClick={handleSaveAddress}
+                                            disabled={savingAddress}
+                                            className="self-end bg-blue-600 text-white px-6 py-2 rounded-xl font-medium hover:bg-blue-700 transition disabled:opacity-50"
+                                        >
+                                            {savingAddress ? "Saving..." : "Save Address"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

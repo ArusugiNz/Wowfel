@@ -6,7 +6,7 @@ import { IconArrowLeft, IconReceipt, IconCheck, IconX, IconPhoto } from "@tabler
 import Navbar from "../../components/Navbar";
 import { auth, db } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, collection, query, orderBy, onSnapshot, updateDoc } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, doc, updateDoc, getDoc, increment } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 
@@ -78,6 +78,21 @@ export default function AdminTransactionsPage() {
             await updateDoc(transactionRef, {
                 status: "cancelled"
             });
+
+            const transactionToCancel = transactions.find(t => t.id === transactionId);
+            if (transactionToCancel && transactionToCancel.items) {
+                for (const item of transactionToCancel.items) {
+                    try {
+                        const productRef = doc(db, "products", item.id);
+                        await updateDoc(productRef, {
+                            stock: increment(item.quantity)
+                        });
+                    } catch (e) {
+                        console.error("Failed to restore stock", e);
+                    }
+                }
+            }
+
             toast.success("Transaction cancelled successfully");
         } catch (error) {
             console.error("Error cancelling transaction:", error);
@@ -164,6 +179,10 @@ export default function AdminTransactionsPage() {
                                     </div>
 
                                     <div className="bg-neutral-50 rounded-xl p-4 border border-neutral-100">
+                                        <div className="mb-4 text-sm">
+                                            <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-1">Shipping Address</h4>
+                                            <p className="text-neutral-700">{transaction.address || "No address provided"}</p>
+                                        </div>
                                         <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Order Details</h4>
                                         <ul className="flex flex-col gap-2">
                                             {transaction.items?.map((item: any, idx: number) => (

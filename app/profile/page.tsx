@@ -56,9 +56,8 @@ export default function ProfilePage() {
 
   const menuItems = [
     { icon: <IconBox size={20} className="text-blue-600" />, label: "My Orders", href: "/orders", color: "bg-blue-50" },
-    { icon: <IconMapPin size={20} className="text-blue-600" />, label: "Addresses", href: "#", color: "bg-blue-50" },
     { icon: <IconSettings size={20} className="text-blue-600" />, label: "Settings", href: "/settings", color: "bg-blue-50" },
-    { icon: <IconHelpCircle size={20} className="text-blue-600" />, label: "Help & Support", href: "#", color: "bg-blue-50" },
+    { icon: <IconHelpCircle size={20} className="text-blue-600" />, label: "Help & Support", href: "/help", color: "bg-blue-50" },
 
     ...(role === "seller" || role === "admin"
       ? [{

@@ -83,6 +83,7 @@ export default function AddProductPage() {
         } catch (error: any) {
             console.error("Firebase Error:", error);
             alert("Gagal menambahkan produk: " + error.message);
+        } finally {
             setLoading(false);
         }
     };
@@ -91,7 +92,6 @@ export default function AddProductPage() {
         <div className="min-h-screen bg-slate-50 font-sans text-neutral-900 pb-20">
             <Toast show={showToast} message="Product added successfully!" />
 
-            {/* Header */}
             <header className="bg-white border-b border-neutral-100 px-6 py-4 sticky top-0 z-40">
                 <div className="max-w-3xl mx-auto flex items-center gap-4">
                     <Link
@@ -118,7 +118,6 @@ export default function AddProductPage() {
                 >
                     <div className="space-y-6">
 
-                        {/* Image */}
                         <div className="flex flex-col gap-2">
                             <label className="font-semibold text-neutral-800 text-sm">
                                 Product Image URL
@@ -166,7 +165,6 @@ export default function AddProductPage() {
                             </div>
                         </div>
 
-                        {/* Name */}
                         <div className="flex flex-col gap-2">
                             <label className="font-semibold text-neutral-800 text-sm">
                                 Product Name *
@@ -180,7 +178,6 @@ export default function AddProductPage() {
                             />
                         </div>
 
-                        {/* Price */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                             <div className="flex flex-col gap-2">
@@ -214,7 +211,6 @@ export default function AddProductPage() {
 
                         </div>
 
-                        {/* Description */}
                         <div className="flex flex-col gap-2">
                             <label className="font-semibold text-neutral-800 text-sm">
                                 Description
@@ -227,7 +223,6 @@ export default function AddProductPage() {
                             />
                         </div>
 
-                        {/* Trakteer URL */}
                         <div className="flex flex-col gap-2">
                             <label className="font-semibold text-neutral-800 text-sm">
                                 Custom Trakteer URL (Optional)
@@ -258,7 +253,7 @@ export default function AddProductPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl"
+                            className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl disabled:opacity-70"
                         >
                             <IconDeviceFloppy size={20} />
                             {loading ? "Saving..." : "Save Product"}
