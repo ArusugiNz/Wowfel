@@ -51,7 +51,9 @@ export default function AddProductPage() {
                 });
 
                 if (!response.ok) {
-                    throw new Error("Failed to upload image to Cloudinary");
+                    const errorText = await response.text();
+                    console.error("Cloudinary error:", errorText);
+                    throw new Error(`Failed to upload image to Cloudinary. Please check if NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET are set correctly in your Railway environment variables and redeploy. Details: ${errorText}`);
                 }
 
                 const data = await response.json();
